@@ -18,7 +18,7 @@ NOTCAR_VALIDATE_DIR = VALIDATE_DIR + "/notcar"
 
 data_distribution = {'train': 0.6, 'test': 0.2, 'validate': 0.2}
 
-# checking if all necessary directory exists, if not create it
+print("checking if all necessary directory exists, if not create it")
 if not os.path.isdir(CAR_TRAIN_DIR):
     os.makedirs(CAR_TRAIN_DIR)
 if not os.path.isdir(NOTCAR_TRAIN_DIR):
@@ -34,29 +34,29 @@ if not os.path.isdir(CAR_VALIDATE_DIR):
 if not os.path.isdir(NOTCAR_VALIDATE_DIR):
     os.makedirs(NOTCAR_VALIDATE_DIR)
 
-# read file names to memory, its ok, it wont be so many.. (few 1000)
+print("read file names to memory, its ok, it wont be so many.. (few 1000)")
 car_files = os.listdir(CAR_SOURCE_FOLDER)
 not_car_files = os.listdir(NOTCAR_SOURCE_FOLDER)
 
-# shuffle them to make it more interesting
+print("shuffle them to make it more interesting")
 shuffle(car_files)
 shuffle(not_car_files)
 
-# separate data
+print("separate data")
 files_length = min(len(car_files), len(not_car_files))
 train_end_idx = round(files_length * data_distribution['train'])
-car_train_files = car_files[0 : train_end_idx]
-not_car_train_files = not_car_files[0 : train_end_idx]
+car_train_files = car_files[0: train_end_idx]
+not_car_train_files = not_car_files[0: train_end_idx]
 
 test_end_idx = train_end_idx + round(files_length * data_distribution['test'])
-car_test_files = car_files[train_end_idx : test_end_idx]
-not_car_test_files = not_car_files[train_end_idx : test_end_idx]
+car_test_files = car_files[train_end_idx: test_end_idx]
+not_car_test_files = not_car_files[train_end_idx: test_end_idx]
 
-car_validate_files = car_files[test_end_idx:]
-not_car_validate_files = not_car_files[test_end_idx:]
+validate_end_idx = test_end_idx + round(files_length * data_distribution['validate'])
+car_validate_files = car_files[test_end_idx:validate_end_idx]
+not_car_validate_files = not_car_files[test_end_idx:validate_end_idx]
 
-# do the copy
-
+print("do copy")
 for f in car_train_files:
     copy(CAR_SOURCE_FOLDER + f, CAR_TRAIN_DIR)
 
