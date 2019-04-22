@@ -1,19 +1,19 @@
 from keras import Sequential
 from keras.callbacks import TensorBoard
 from keras.layers import Conv2D, Flatten, Dense, Activation, MaxPooling2D, Dropout
-from keras.optimizers import SGD
+from keras.optimizers import SGD, Adam
 from keras.regularizers import Regularizer, l2, l1_l2
 from keras_preprocessing.image import ImageDataGenerator
 
-NAME = "v0"
+NAME = "v10"
 TRAIN_DIR = "data/train/"
 VALIDATE_DIR = "data/validate/"
 IMG_WIDTH, IMG_HEIGHT = 150, 150
 
 BATCH_SIZE = 32
 EPOCHS = 10
-TRAIN_STEP = 2000
-VALIDATION_STEP = 800
+TRAIN_STEP = 200
+VALIDATION_STEP = 50
 
 FILE_NAME = "model/%s-mymodel.h5" % NAME
 
@@ -39,14 +39,11 @@ try:
     model.add(Dense(1, activation='sigmoid', kernel_regularizer=l1_l2(0.01)))
 
     model.compile(loss='binary_crossentropy',
-                  optimizer=SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True),
+                  optimizer=Adam(lr=0.001, beta_1=0.9, beta_2=0.999, epsilon=None, decay=0.0, amsgrad=False),
                   metrics=['accuracy'])
 
     train_datagen = ImageDataGenerator(
-            rescale=1./255,
-            shear_range=0.2,
-            zoom_range=0.2,
-            horizontal_flip=True)
+            rescale=1./255)
 
     test_datagen = ImageDataGenerator(rescale=1./255)
 

@@ -5,15 +5,15 @@ from keras.optimizers import SGD
 from keras.regularizers import Regularizer, l2, l1_l2
 from keras_preprocessing.image import ImageDataGenerator
 
-NAME = "v0"
+NAME = "v6"
 TRAIN_DIR = "data/train/"
 VALIDATE_DIR = "data/validate/"
 IMG_WIDTH, IMG_HEIGHT = 150, 150
 
 BATCH_SIZE = 32
 EPOCHS = 10
-TRAIN_STEP = 2000
-VALIDATION_STEP = 800
+TRAIN_STEP = 200
+VALIDATION_STEP = 50
 
 FILE_NAME = "model/%s-mymodel.h5" % NAME
 
@@ -32,11 +32,9 @@ try:
     model.add(MaxPooling2D(pool_size=(2, 2)))
 
     model.add(Flatten())
-    model.add(Dense(256, activation='relu'))
-    model.add(Dropout(0.5))
     model.add(Dense(128, activation='relu'))
-    model.add(Dropout(0.5))
-    model.add(Dense(1, activation='sigmoid', kernel_regularizer=l1_l2(0.01)))
+    model.add(Dropout(0.6))
+    model.add(Dense(1, activation='sigmoid', kernel_regularizer=l1_l2(0.1)))
 
     model.compile(loss='binary_crossentropy',
                   optimizer=SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True),
