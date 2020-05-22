@@ -53,7 +53,7 @@ The preclassifier is simple convolutional network and it does binary classificat
 * [Preclassification convolutional modell determine valid vehicle images](https://github.com/banda13/Carrecognizer-preclassifier)
 * [Database](https://github.com/banda13/Carrecognizer-database)
 * [Django backend](https://github.com/banda13/Carrecognizer-backend)
-* [Angular web application](https://github.com/banda13/Carrecognizer-backend)
+* [Angular web application](https://github.com/banda13/Carrecognizer-angular)
 * [Android application](https://github.com/banda13/Carrecognizer-android)
 * [Messenger chatbot](https://github.com/banda13/Carrecongnizer-chatbot)
 ## Demos
